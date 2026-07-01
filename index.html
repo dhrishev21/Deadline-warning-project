@@ -1,0 +1,1390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Project Risk Intelligence Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(20, 30, 55, 0.45);
+            --panel-border: rgba(255, 255, 255, 0.07);
+            --accent-primary: #38bdf8;
+            --accent-primary-glow: rgba(56, 189, 248, 0.25);
+            --risk-high: #f43f5e;
+            --risk-high-glow: rgba(244, 63, 94, 0.25);
+            --risk-med: #f59e0b;
+            --risk-med-glow: rgba(245, 158, 11, 0.25);
+            --risk-low: #10b981;
+            --risk-low-glow: rgba(16, 185, 129, 0.25);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            --header-font: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(244, 63, 94, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            font-size: 14px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Filter Panel */
+        aside {
+            background: rgba(13, 20, 38, 0.7);
+            border-right: 1px solid var(--panel-border);
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--risk-high));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-family: var(--header-font);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        }
+
+        .logo-text h1 {
+            font-family: var(--header-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .filter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px var(--accent-primary-glow);
+        }
+
+        .filter-btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--panel-border);
+            color: var(--text-muted);
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-primary-glow);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .filter-btn.active.high-btn {
+            background: var(--risk-high-glow);
+            border-color: var(--risk-high);
+            color: var(--risk-high);
+        }
+
+        .filter-btn.active.med-btn {
+            background: var(--risk-med-glow);
+            border-color: var(--risk-med);
+            color: var(--risk-med);
+        }
+
+        .filter-btn.active.low-btn {
+            background: var(--risk-low-glow);
+            border-color: var(--risk-low);
+            color: var(--risk-low);
+        }
+
+        .range-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            box-shadow: 0 0 6px var(--accent-primary-glow);
+            transition: transform 0.1s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .reset-btn {
+            margin-top: auto;
+            background: linear-gradient(to right, var(--risk-high-glow), rgba(20,30,55,0.4));
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: var(--risk-high);
+            border-color: var(--risk-high);
+            box-shadow: 0 4px 12px var(--risk-high-glow);
+        }
+
+        /* Main Dashboard Content Area */
+        main {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Header block */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h2 {
+            font-family: var(--header-font);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--risk-low);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--risk-low);
+            border-radius: 50%;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px var(--risk-low); }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        /* Glass Cards Base */
+        .glass-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* KPI Container */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .kpi-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .kpi-card.kpi-total::before { background: var(--accent-primary); }
+        .kpi-card.kpi-avg::before { background: var(--risk-med); }
+        .kpi-card.kpi-high::before { background: var(--risk-high); }
+
+        .kpi-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .kpi-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-family: var(--header-font);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .kpi-indicator {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .kpi-indicator.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--risk-low);
+        }
+
+        .kpi-indicator.negative {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--risk-high);
+        }
+
+        .kpi-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--panel-border);
+        }
+
+        /* Charts Grid Layout */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .chart-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 340px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-title {
+            font-family: var(--header-font);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .chart-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            height: calc(100% - 30px);
+        }
+
+
+        /* Engineering metrics and intelligence panels */
+        .engineering-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .metric-card {
+            padding: 1rem;
+            min-height: 94px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-family: var(--header-font);
+            font-size: 1.65rem;
+            font-weight: 700;
+        }
+
+        .intelligence-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+            gap: 1.5rem;
+        }
+
+        .intelligence-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .panel-topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .select-input, .scenario-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.22);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            border-radius: 8px;
+            padding: 0.65rem 0.75rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .risk-pill {
+            min-width: 84px;
+            text-align: center;
+            border-radius: 8px;
+            padding: 0.55rem 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--panel-border);
+            font-weight: 800;
+        }
+
+        .contributor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .contributor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-height: 132px;
+        }
+
+        .contributor-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.55rem 0.65rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--panel-border);
+            font-size: 0.82rem;
+        }
+
+        .contributor-item.positive span:last-child { color: var(--risk-high); }
+        .contributor-item.negative span:last-child { color: var(--risk-low); }
+
+        .recommendation-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .recommendation-card {
+            border: 1px solid var(--panel-border);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.035);
+            padding: 0.85rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .recommendation-title {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .recommendation-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .scenario-card {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 1.5rem;
+        }
+
+        .scenario-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scenario-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-summary-card {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+            background: rgba(0, 0, 0, 0.14);
+        }
+
+        .scenario-summary-card span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .scenario-summary-card strong {
+            display: block;
+            margin-top: 0.25rem;
+            font-family: var(--header-font);
+            font-size: 1.45rem;
+        }
+
+        .scenario-chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            height: 270px;
+        }
+
+        .mini-chart-wrapper {
+            min-height: 240px;
+            position: relative;
+        }
+
+        tr.selected-project td {
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        @media (max-width: 1180px) {
+            .engineering-grid, .scenario-summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .intelligence-grid, .scenario-card { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 820px) {
+            .app-container { grid-template-columns: 1fr; }
+            aside { position: relative; height: auto; }
+            main { max-height: none; }
+            .kpi-container, .charts-grid, .contributor-grid, .scenario-chart-grid, .engineering-grid { grid-template-columns: 1fr; }
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .command-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 320px;
+        }
+
+        .command-card.wide {
+            grid-column: span 2;
+        }
+
+        .mini-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .mini-kpi {
+            border: 1px solid var(--panel-border);
+            background: rgba(0,0,0,0.14);
+            border-radius: 8px;
+            padding: 0.8rem;
+        }
+
+        .mini-kpi span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .mini-kpi strong {
+            display: block;
+            margin-top: 0.25rem;
+            font-family: var(--header-font);
+            font-size: 1.15rem;
+        }
+
+        .compact-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .compact-table th, .compact-table td {
+            padding: 0.65rem;
+        }
+
+        .alert-list, .assistant-answer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .alert-row {
+            padding: 0.7rem;
+            border-radius: 8px;
+            border: 1px solid rgba(244, 63, 94, 0.25);
+            background: rgba(244, 63, 94, 0.08);
+            color: var(--text-main);
+            font-size: 0.82rem;
+        }
+
+        .assistant-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.75rem;
+        }
+
+        .primary-btn {
+            background: var(--accent-primary-glow);
+            border: 1px solid var(--accent-primary);
+            color: var(--text-main);
+            border-radius: 8px;
+            padding: 0.65rem 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .loading-text {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 1180px) {
+            .command-grid, .command-card.wide { grid-template-columns: 1fr; grid-column: span 1; }
+            .mini-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        /* Bottom Row - Full Width Risk Table */
+        .table-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 400px;
+        }
+
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-family: var(--header-font);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 1rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--panel-border);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        th:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        th.sorted-asc::after { content: ' Ã¢â€“Â´'; }
+        th.sorted-desc::after { content: ' Ã¢â€“Â¾'; }
+
+        td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-weight: 500;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        /* Risk Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-high {
+            background: rgba(244, 63, 94, 0.15);
+            color: #fb7185;
+            border: 1px solid rgba(244, 63, 94, 0.25);
+        }
+
+        .badge-medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        .badge-low {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        /* Risk score indicator in table */
+        .score-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-bar-bg {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .score-text {
+            width: 32px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Pagination controls */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pagination-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--panel-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* SVG Icons */
+        .icon-stroke {
+            stroke: var(--accent-primary);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .kpi-total .icon-stroke { stroke: var(--accent-primary); }
+        .kpi-avg .icon-stroke { stroke: var(--risk-med); }
+        .kpi-high .icon-stroke { stroke: var(--risk-high); }
+
+        /* Custom Alert Dialog inside dashboard */
+        .alert-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(13, 20, 38, 0.9);
+            border: 1.5px solid var(--risk-high);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 10px 30px var(--risk-high-glow);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            gap: 0.75rem;
+            max-width: 380px;
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .alert-toast.show {
+            transform: translateY(0);
+        }
+
+        .alert-toast-icon {
+            font-size: 1.5rem;
+            color: var(--risk-high);
+            display: flex;
+            align-items: center;
+        }
+
+        .alert-toast-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .alert-toast-title {
+            font-weight: 700;
+            font-family: var(--header-font);
+            color: var(--text-main);
+        }
+
+        .alert-toast-msg {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside>
+            <div class="logo-container">
+                <div class="logo-icon">Ã¢Å¡Â </div>
+                <div class="logo-text">
+                    <h1>Early Warning</h1>
+                    <span>IT Projects ML Portal</span>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <!-- Search -->
+                <div class="filter-group">
+                    <label class="filter-label">Search Project</label>
+                    <input type="text" id="projectSearch" class="search-input" placeholder="Enter Project ID...">
+                </div>
+
+                <!-- Risk Category Buttons -->
+                <div class="filter-group">
+                    <label class="filter-label">Risk Category</label>
+                    <div class="filter-btn-group">
+                        <button class="filter-btn active" data-risk="All">All</button>
+                        <button class="filter-btn high-btn" data-risk="High">High</button>
+                        <button class="filter-btn med-btn" data-risk="Medium">Med</button>
+                        <button class="filter-btn low-btn" data-risk="Low">Low</button>
+                    </div>
+                </div>
+
+                <!-- Team Size Slider -->
+                <div class="filter-group">
+                    <div class="range-container">
+                        <label class="filter-label" style="display: flex; justify-content: space-between;">
+                            <span>Team Size</span>
+                            <span id="teamSizeVal" style="color: var(--accent-primary); font-weight: 700;">Any</span>
+                        </label>
+                        <input type="range" id="teamSizeSlider" class="range-slider" min="3" max="20" value="3">
+                        <div class="range-values">
+                            <span>Min (3)</span>
+                            <span>Max (20)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Velocity Slider -->
+                <div class="filter-group">
+                    <div class="range-container">
+                        <label class="filter-label" style="display: flex; justify-content: space-between;">
+                            <span>Min Sprint Velocity</span>
+                            <span id="velocityVal" style="color: var(--accent-primary); font-weight: 700;">0.50</span>
+                        </label>
+                        <input type="range" id="velocitySlider" class="range-slider" min="0.5" max="1.5" step="0.05" value="0.5">
+                        <div class="range-values">
+                            <span>Behind (0.5)</span>
+                            <span>On Track (1.5)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reset Filters Button -->
+                <button id="resetFiltersBtn" class="reset-btn">Reset All Filters</button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main>
+            <!-- Header -->
+            <header>
+                <div class="header-title">
+                    <h2>AI Project Risk Intelligence Platform</h2>
+                    <p>Explainable risk prediction, engineering activity signals, and prescriptive scenario planning</p>
+                </div>
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <span>Risk Intelligence Active</span>
+                </div>
+            </header>
+
+            <!-- KPI Cards row -->
+            <div class="kpi-container">
+                <div class="glass-card kpi-card kpi-total">
+                    <div class="kpi-info">
+                        <span class="kpi-title">Projects Monitored</span>
+                        <span id="kpiTotalProjects" class="kpi-value">---</span>
+                    </div>
+                    <div class="kpi-icon-wrapper">
+                        <svg class="icon-stroke" width="24" height="24" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="9" y1="3" x2="9" y2="21"/>
+                            <line x1="15" y1="3" x2="15" y2="21"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="3" y1="15" x2="21" y2="15"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card kpi-avg">
+                    <div class="kpi-info">
+                        <span class="kpi-title">Average Risk Score</span>
+                        <span id="kpiAvgRisk" class="kpi-value">--%</span>
+                    </div>
+                    <div class="kpi-icon-wrapper">
+                        <svg class="icon-stroke" width="24" height="24" viewBox="0 0 24 24">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="glass-card kpi-card kpi-high">
+                    <div class="kpi-info">
+                        <span class="kpi-title">Projects at High Risk</span>
+                        <span id="kpiHighRisk" class="kpi-value" style="color: var(--risk-high);">---</span>
+                    </div>
+                    <div class="kpi-icon-wrapper">
+                        <svg class="icon-stroke" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engineering Activity Metrics -->
+            <div class="engineering-grid">
+                <div class="glass-card metric-card">
+                    <span class="metric-label">Commits This Week</span>
+                    <span id="metricCommits" class="metric-value">--</span>
+                </div>
+                <div class="glass-card metric-card">
+                    <span class="metric-label">Open PRs</span>
+                    <span id="metricOpenPrs" class="metric-value">--</span>
+                </div>
+                <div class="glass-card metric-card">
+                    <span class="metric-label">Blocked Tasks</span>
+                    <span id="metricBlocked" class="metric-value">--</span>
+                </div>
+                <div class="glass-card metric-card">
+                    <span class="metric-label">Sprint Velocity</span>
+                    <span id="metricSprintVelocity" class="metric-value">--</span>
+                </div>
+                <div class="glass-card metric-card">
+                    <span class="metric-label">Bug Trend</span>
+                    <span id="metricBugTrend" class="metric-value">--</span>
+                </div>
+            </div>
+
+            <!-- Explainability and Recommendations -->
+            <div class="intelligence-grid">
+                <div class="glass-card intelligence-card">
+                    <div class="panel-topline">
+                        <div>
+                            <span class="chart-title">Explainable AI Risk Drivers</span>
+                            <div class="chart-subtitle">Single-project SHAP drivers and portfolio drivers follow active filters</div>
+                        </div>
+                        <div style="min-width: 220px;">
+                            <select id="projectSelect" class="select-input"></select>
+                        </div>
+                        <div id="selectedRiskScore" class="risk-pill">--%</div>
+                    </div>
+                    <div class="contributor-grid">
+                        <div>
+                            <div class="filter-label" style="margin-bottom: 0.5rem;">Top Positive Contributors</div>
+                            <div id="positiveContributors" class="contributor-list"></div>
+                        </div>
+                        <div>
+                            <div class="filter-label" style="margin-bottom: 0.5rem;">Top Negative Contributors</div>
+                            <div id="negativeContributors" class="contributor-list"></div>
+                        </div>
+                    </div>
+                    <div class="mini-chart-wrapper">
+                        <canvas id="shapChart"></canvas>
+                    </div>
+                    <div>
+                        <div class="filter-label" style="margin-bottom: 0.5rem;">Portfolio Drivers For Current Filters</div>
+                        <div id="portfolioContributors" class="contributor-list"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card intelligence-card">
+                    <div>
+                        <span class="chart-title">Prescriptive Recommendations</span>
+                        <div class="chart-subtitle">Ranked by expected risk reduction and implementation difficulty</div>
+                    </div>
+                    <div id="recommendationCards" class="recommendation-stack"></div>
+                </div>
+            </div>
+
+            <!-- What-if Scenario Simulator -->
+            <div class="glass-card scenario-card">
+                <div class="scenario-controls">
+                    <div>
+                        <span class="chart-title">What If Analysis</span>
+                        <div class="chart-subtitle">Adjust delivery levers and rescore the selected project</div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Team Size <span id="scenarioTeamVal" style="color: var(--accent-primary);"></span></label>
+                        <input type="range" id="scenarioTeam" class="range-slider" min="3" max="20" value="5">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Sprint Velocity <span id="scenarioVelocityVal" style="color: var(--accent-primary);"></span></label>
+                        <input type="range" id="scenarioVelocity" class="range-slider" min="0.5" max="1.5" step="0.05" value="1">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Scope Changes <span id="scenarioScopeVal" style="color: var(--accent-primary);"></span></label>
+                        <input type="range" id="scenarioScope" class="range-slider" min="0" max="8" value="2">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Deadline Extension <span id="scenarioDeadlineVal" style="color: var(--accent-primary);"></span></label>
+                        <input type="range" id="scenarioDeadline" class="range-slider" min="0" max="42" step="7" value="14">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Bug Count <span id="scenarioBugsVal" style="color: var(--accent-primary);"></span></label>
+                        <input type="range" id="scenarioBugs" class="range-slider" min="0" max="60" value="10">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="scenario-summary-grid">
+                        <div class="scenario-summary-card"><span>Current Risk</span><strong id="scenarioCurrentRisk">--%</strong></div>
+                        <div class="scenario-summary-card"><span>Scenario Risk</span><strong id="scenarioNewRisk">--%</strong></div>
+                        <div class="scenario-summary-card"><span>Risk Difference</span><strong id="scenarioDifference">--%</strong></div>
+                        <div class="scenario-summary-card"><span>Improvement</span><strong id="scenarioImprovement">--%</strong></div>
+                    </div>
+                    <div class="scenario-chart-grid">
+                        <div class="mini-chart-wrapper"><canvas id="riskComparisonChart"></canvas></div>
+                        <div class="mini-chart-wrapper"><canvas id="contributionComparisonChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Production Command Center -->
+            <div class="command-grid">
+                <div class="glass-card command-card">
+                    <div>
+                        <span class="chart-title">Risk Timeline Forecast</span>
+                        <div id="forecastTrend" class="chart-subtitle">Loading forecast...</div>
+                    </div>
+                    <div class="mini-kpi-grid">
+                        <div class="mini-kpi"><span>Trend</span><strong id="forecastTrendValue">--</strong></div>
+                        <div class="mini-kpi"><span>High Risk Date</span><strong id="forecastHighDate">--</strong></div>
+                        <div class="mini-kpi"><span>Current</span><strong id="forecastCurrentRisk">--</strong></div>
+                        <div class="mini-kpi"><span>Week 4</span><strong id="forecastWeek4Risk">--</strong></div>
+                    </div>
+                    <div class="mini-chart-wrapper"><canvas id="forecastChart"></canvas></div>
+                </div>
+
+                <div class="glass-card command-card">
+                    <div>
+                        <span class="chart-title">Monte Carlo Delivery Simulation</span>
+                        <div class="chart-subtitle">Completion probability distribution from randomized delivery paths</div>
+                    </div>
+                    <div class="mini-kpi-grid">
+                        <div class="mini-kpi"><span>P50</span><strong id="mcP50">--</strong></div>
+                        <div class="mini-kpi"><span>P80</span><strong id="mcP80">--</strong></div>
+                        <div class="mini-kpi"><span>P90</span><strong id="mcP90">--</strong></div>
+                        <div class="mini-kpi"><span>On Time</span><strong id="mcOnTime">--</strong></div>
+                    </div>
+                    <div class="mini-chart-wrapper"><canvas id="monteCarloChart"></canvas></div>
+                </div>
+
+                <div class="glass-card command-card">
+                    <div>
+                        <span class="chart-title">Historical Project Matching</span>
+                        <div id="similarInsight" class="chart-subtitle">Loading similar projects...</div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="compact-table">
+                            <thead><tr><th>Project</th><th>Similarity</th><th>Outcome</th></tr></thead>
+                            <tbody id="similarProjectsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-card command-card">
+                    <div>
+                        <span class="chart-title">MLOps Drift Monitor</span>
+                        <div id="driftStatus" class="chart-subtitle">Loading drift status...</div>
+                    </div>
+                    <div id="driftAlerts" class="alert-list"></div>
+                </div>
+
+                <div class="glass-card command-card wide">
+                    <div class="panel-topline">
+                        <div>
+                            <span class="chart-title">Portfolio Risk Command Center</span>
+                            <div class="chart-subtitle">Prioritized by business impact times risk probability</div>
+                        </div>
+                        <div class="mini-kpi-grid" style="min-width: 520px;">
+                            <div class="mini-kpi"><span>Portfolio Risk</span><strong id="portfolioRisk">--</strong></div>
+                            <div class="mini-kpi"><span>High Risk</span><strong id="portfolioHighRisk">--</strong></div>
+                            <div class="mini-kpi"><span>Total Delay</span><strong id="portfolioDelay">--</strong></div>
+                            <div class="mini-kpi"><span>Utilization</span><strong id="portfolioUtilization">--</strong></div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="compact-table">
+                            <thead><tr><th>Project</th><th>Dept</th><th>Risk</th><th>Forecast</th><th>Delay</th><th>Priority</th></tr></thead>
+                            <tbody id="portfolioBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-card command-card wide">
+                    <div>
+                        <span class="chart-title">Advanced Scenario Lab + Project Assistant</span>
+                        <div id="scenarioLabSummary" class="chart-subtitle">Loading scenario comparison...</div>
+                    </div>
+                    <div class="assistant-row">
+                        <input id="assistantQuestion" class="search-input" value="Why is this project risky?" />
+                        <button id="askAssistantBtn" class="primary-btn">Ask</button>
+                    </div>
+                    <div id="assistantAnswer" class="assistant-answer loading-text">Ask a project question to retrieve a grounded answer.</div>
+                    <div class="table-wrapper">
+                        <table class="compact-table">
+                            <thead><tr><th>Scenario</th><th>Risk</th><th>Delta</th><th>Improvement</th><th>Changes</th></tr></thead>
+                            <tbody id="scenarioLabBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Charts Grid (2x2) -->
+            <div class="charts-grid">
+                <div class="glass-card chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <span class="chart-title">Risk Level Distribution</span>
+                            <div class="chart-subtitle">Breakdown of projects by model threshold</div>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="riskDistChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-card">
+                    <div class="chart-header">
+                        <div>
+                            <span class="chart-title">Feature Importance Analysis</span>
+                            <div class="chart-subtitle">What inputs contribute most to predictions</div>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="featureImportanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-card" style="grid-column: span 2; height: 350px;">
+                    <div class="chart-header">
+                        <div>
+                            <span class="chart-title">Historical Back-test Simulator Ã¢â‚¬â€ Project #47</span>
+                            <div class="chart-subtitle">Demonstrates model ability to trigger alert 4 weeks before actual delay</div>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="backtestChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scored Projects Table -->
+            <div class="glass-card table-card">
+                <div class="table-toolbar">
+                    <div class="table-title">Predictive Projects Index</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);" id="tableSummaryText">Showing 0-0 of 0 projects</div>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table id="projectsTable">
+                        <thead>
+                            <tr>
+                                <th data-col="project_id" class="sorted-asc">Project ID</th>
+                                <th data-col="team_size">Team Size</th>
+                                <th data-col="sprint_velocity">Sprint Velocity</th>
+                                <th data-col="tasks_completed_pct">Tasks Completed</th>
+                                <th data-col="bugs_open">Open Bugs</th>
+                                <th data-col="completion_gap">Completion Gap</th>
+                                <th data-col="risk_score">ML Risk Score</th>
+                                <th data-col="risk_level">Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- JS populated rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Table Pagination -->
+                <div class="pagination-container">
+                    <div>
+                        Page <span id="currentPageNum" style="color: var(--text-main); font-weight: bold;">1</span> of <span id="totalPageNum" style="color: var(--text-main); font-weight: bold;">1</span>
+                    </div>
+                    <div class="pagination-btns">
+                        <button id="prevPageBtn" class="page-btn" disabled>&larr; Previous</button>
+                        <button id="nextPageBtn" class="page-btn" disabled>Next &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Alert Notification Pop-up -->
+    <div id="alertToast" class="alert-toast">
+        <div class="alert-toast-icon">Ã¢Å¡Â </div>
+        <div class="alert-toast-content">
+            <div class="alert-toast-title">Critical Early Warning Alert</div>
+            <div class="alert-toast-msg" id="alertToastMsg">Project #47 risk score exceeded 60% in Week 6.</div>
+        </div>
+    </div>
+
+    <!-- Main JS Application script -->
+    <script src="dashboard_app.js?v=advanced2"></script>
+</body>
+</html>
+
+
+
+
+
+
+

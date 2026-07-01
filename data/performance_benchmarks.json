@@ -1,0 +1,33 @@
+{
+  "benchmarks": [
+    {
+      "endpoint": "forecast",
+      "latency_ms": 139.3
+    },
+    {
+      "endpoint": "monte_carlo",
+      "latency_ms": 55.4
+    },
+    {
+      "endpoint": "similarity",
+      "latency_ms": 36.7
+    },
+    {
+      "endpoint": "portfolio",
+      "latency_ms": 58.2
+    },
+    {
+      "endpoint": "drift",
+      "latency_ms": 50.6
+    },
+    {
+      "endpoint": "assistant",
+      "latency_ms": 201.6
+    },
+    {
+      "endpoint": "scenario_lab",
+      "latency_ms": 1324.8
+    }
+  ],
+  "server": "http://127.0.0.1:8010"
+}

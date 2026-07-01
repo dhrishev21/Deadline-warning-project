@@ -1,0 +1,123 @@
+<!-- Features 5-11 Dashboard Extensions -->
+<div class="features-extension-container" style="margin-top: 2rem;">
+
+    <!-- Portfolio & Monitoring Row -->
+    <div class="charts-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 2rem;">
+        <!-- Feature 10: Portfolio Command Center -->
+        <div class="glass-card table-card">
+            <div class="table-toolbar">
+                <div class="table-title">Portfolio Risk Command Center</div>
+                <button id="refreshPortfolioBtn" class="page-btn">Refresh</button>
+            </div>
+            <div class="scenario-summary-grid" style="margin-bottom: 1rem;">
+                <div class="scenario-summary-card"><span>Portfolio Risk</span><strong id="portAvgRisk">--%</strong></div>
+                <div class="scenario-summary-card"><span>High Risk Projects</span><strong id="portHighRisk">--</strong></div>
+                <div class="scenario-summary-card"><span>Expected Delay</span><strong id="portDelay">-- days</strong></div>
+                <div class="scenario-summary-card"><span>Resource Util</span><strong id="portResources">--</strong></div>
+            </div>
+            <div class="table-wrapper" style="max-height: 250px;">
+                <table id="portfolioTable">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Impact</th>
+                            <th>Priority Score</th>
+                            <th>Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolioTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Feature 11: Data Drift & Model Health -->
+        <div class="glass-card intelligence-card">
+            <div class="table-toolbar">
+                <div class="table-title">Model Health & Drift</div>
+                <span id="driftOverallStatus" class="badge badge-low">Checking...</span>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Monitoring feature distribution shifts (PSI).</div>
+            <div id="driftFeaturesList" style="max-height: 250px; overflow-y: auto;">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Intelligence Hub (Context aware for selected project) -->
+    <h3 style="margin-bottom: 1rem; color: var(--text-main); font-family: var(--header-font); font-weight: 500;">Advanced Intelligence Hub</h3>
+    
+    <div class="charts-grid" style="margin-bottom: 2rem;">
+        
+        <!-- Feature 5: Risk Timeline Forecasting -->
+        <div class="glass-card chart-card">
+            <div class="chart-header">
+                <div>
+                    <span class="chart-title">Risk Timeline Forecast</span>
+                    <div class="chart-subtitle" id="forecastSubtitle">Loading forecast...</div>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="forecastChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Feature 6: Monte Carlo Deadline Simulator -->
+        <div class="glass-card chart-card">
+            <div class="chart-header">
+                <div>
+                    <span class="chart-title">Monte Carlo Delivery Simulation</span>
+                    <div class="chart-subtitle">Based on 5000 randomized execution paths</div>
+                </div>
+            </div>
+            <div class="scenario-summary-grid" style="margin-bottom: 0.5rem; grid-template-columns: repeat(3, 1fr);">
+                <div class="scenario-summary-card"><span>P50 Delivery</span><strong id="mcP50">--</strong></div>
+                <div class="scenario-summary-card"><span>P80 Delivery</span><strong id="mcP80">--</strong></div>
+                <div class="scenario-summary-card"><span>P90 Delivery</span><strong id="mcP90">--</strong></div>
+            </div>
+            <div class="chart-wrapper" style="height: 180px;">
+                <canvas id="monteCarloChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Feature 7: Historical Project Matching -->
+        <div class="glass-card chart-card">
+            <div class="chart-header">
+                <div>
+                    <span class="chart-title">Historical Project Matching</span>
+                    <div class="chart-subtitle" id="similarityInsight">Finding nearest neighbors...</div>
+                </div>
+            </div>
+            <div class="table-wrapper" style="max-height: 220px; overflow-y: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--panel-border);">
+                            <th style="padding: 0.5rem;">Project</th>
+                            <th style="padding: 0.5rem;">Similarity</th>
+                            <th style="padding: 0.5rem;">Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="similarProjectsBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Feature 8: Natural Language Assistant -->
+        <div class="glass-card intelligence-card">
+            <div class="chart-header">
+                <div>
+                    <span class="chart-title">AI Project Assistant</span>
+                    <div class="chart-subtitle">Ask questions about this project</div>
+                </div>
+            </div>
+            <div id="chatHistory" style="flex-grow: 1; min-height: 150px; max-height: 180px; overflow-y: auto; margin-bottom: 1rem; padding: 0.5rem; background: rgba(0,0,0,0.2); border-radius: 6px; font-size: 0.9rem;">
+                <div style="color: var(--text-muted); font-style: italic;">How can I help you analyze this project?</div>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="text" id="chatInput" placeholder="e.g., Why is this project risky?" class="select-input" style="flex-grow: 1;" onkeypress="if(event.key === 'Enter') window.askAssistant()">
+                <button onclick="window.askAssistant()" class="page-btn" style="background: var(--accent-primary); color: #000; border: none; font-weight: bold;">Ask</button>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

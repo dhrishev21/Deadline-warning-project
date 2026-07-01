@@ -1,0 +1,174 @@
+# Power BI Dashboard — Setup Guide
+
+Follow these steps exactly after running all Python scripts.
+
+---
+
+## Step 1 — Download Power BI Desktop
+Go to: https://powerbi.microsoft.com/desktop
+Click "Download free" — it's completely free.
+
+---
+
+## Step 2 — Import the data files
+
+1. Open Power BI Desktop
+2. Home → Get Data → Text/CSV
+3. Import these 3 files one by one:
+   - data/projects_scored.csv
+   - data/feature_importances.csv
+   - data/backtest_timeline.csv
+4. For each: click Load (not Transform — data is already clean)
+
+---
+
+## Step 3 — Fix column types
+
+Home → Transform Data → Power Query Editor
+
+For projects_scored:
+  - risk_score     → Decimal Number
+  - risk_level     → Text
+  - delayed        → Whole Number
+  - team_size      → Whole Number
+
+For backtest_timeline:
+  - week           → Whole Number
+  - risk_score     → Decimal Number
+
+Close & Apply.
+
+---
+
+## Step 4 — Create 2 DAX measures
+
+Click on projects_scored table in the right panel.
+Modeling → New Measure
+
+Measure 1:
+  Projects at High Risk =
+  CALCULATE(
+      COUNTROWS(projects_scored),
+      projects_scored[risk_level] = "High"
+  )
+
+Measure 2:
+  Avg Risk Score =
+  AVERAGE(projects_scored[risk_score])
+
+---
+
+## Step 5 — Build the dashboard (4 visuals + 2 KPI cards)
+
+### Layout: use a 2x2 grid with KPI cards across the top
+
+---
+
+### KPI Card 1 — "Projects at High Risk"
+  Insert → Card
+  Field: [Projects at High Risk] (your DAX measure)
+  Format: red color
+
+### KPI Card 2 — "Avg Risk Score"
+  Insert → Card
+  Field: [Avg Risk Score]
+  Format: show as percentage
+
+---
+
+### Visual 1 — Risk Score Table (top-left quadrant)
+  Visualization: Table
+  Columns: project_id, team_size, sprint_velocity, risk_score, risk_level
+  Sort by: risk_score descending
+
+  Add conditional formatting on risk_score:
+    Format → Conditional formatting → Background color
+    Rules:
+      If value > 0.65 → Red (#E24B4A)
+      If value > 0.35 → Yellow (#EF9F27)
+      Else → Green (#3B9C6E)
+
+---
+
+### Visual 2 — Risk Distribution (top-right quadrant)
+  Visualization: Donut chart
+  Legend: risk_level
+  Values: Count of project_id
+  
+  Custom colors (Format → Colors):
+    High   → #E24B4A
+    Medium → #EF9F27
+    Low    → #3B9C6E
+
+---
+
+### Visual 3 — Feature Importance (bottom-left)
+  Visualization: Clustered bar chart (horizontal)
+  Y-axis: feature (from feature_importances table)
+  X-axis: importance
+  Sort: descending by importance
+  Title: "What drives delays most?"
+  Color: #378ADD (blue)
+
+---
+
+### Visual 4 — Back-test Trend Line (bottom-right)
+  Data: backtest_timeline table
+  Visualization: Line chart
+  X-axis: week
+  Y-axis: risk_score
+
+  Add a reference line:
+    Analytics pane (magnifying glass icon) → Constant line
+    Value: 0.60
+    Color: Red
+    Label: "Alert threshold"
+    Style: Dashed
+
+  Add a text box annotation near Week 6:
+    Insert → Text box
+    Type: "Week 6: Model flagged HIGH RISK"
+    Font: red, bold
+
+---
+
+## Step 6 — Add Slicers
+
+  Insert → Slicer
+  Slicer 1: risk_level    (from projects_scored)
+  Slicer 2: team_size     (from projects_scored)
+
+  Place slicers at the top of the page above the visuals.
+
+---
+
+## Step 7 — Save and export
+
+  File → Save As → dashboard.pbix → save to powerbi/ folder
+
+  To export as PDF for your portfolio:
+  File → Export → Export to PDF
+
+  To take a screenshot for your README:
+  Use Windows Snipping Tool or Cmd+Shift+4 on Mac
+
+---
+
+## Your dashboard should show:
+
+  - 222 projects at HIGH RISK (shown in red KPI card)
+  - Donut chart: most projects in High (red zone)
+  - Feature importance: team_availability_pct is #1 driver
+  - Back-test line: jumps above 0.60 at Week 6, stays high
+  
+  This is your money demo. When someone asks "does it work?",
+  point to the back-test chart and say:
+  
+  "The model flagged this project 4 weeks before the delay was
+  confirmed. That is the intervention window where you can still
+  fix things."
+
+---
+
+Good luck! This dashboard, combined with the 0.861 ROC-AUC and 
+the 4-week early warning, is a genuinely impressive project.

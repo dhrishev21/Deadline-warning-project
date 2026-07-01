@@ -1,0 +1,1569 @@
+{
+  "forecast": {
+    "project_id": 1,
+    "current_risk": 78.9,
+    "current_risk_level": "High",
+    "forecast": [
+      {
+        "week": 1,
+        "date": "2026-07-06",
+        "risk": 76.1,
+        "risk_pct": 0.7614,
+        "confidence_lower": 68.1,
+        "confidence_upper": 84.1,
+        "risk_level": "High"
+      },
+      {
+        "week": 2,
+        "date": "2026-07-13",
+        "risk": 76.1,
+        "risk_pct": 0.7614,
+        "confidence_lower": 64.8,
+        "confidence_upper": 87.5,
+        "risk_level": "High"
+      },
+      {
+        "week": 3,
+        "date": "2026-07-20",
+        "risk": 76.0,
+        "risk_pct": 0.76,
+        "confidence_lower": 62.1,
+        "confidence_upper": 89.9,
+        "risk_level": "High"
+      },
+      {
+        "week": 4,
+        "date": "2026-07-27",
+        "risk": 76.2,
+        "risk_pct": 0.7618,
+        "confidence_lower": 60.2,
+        "confidence_upper": 92.2,
+        "risk_level": "High"
+      }
+    ],
+    "risk_trend": "stable",
+    "predicted_high_risk_date": "2026-07-06",
+    "escalation_warning": null,
+    "horizon_weeks": 4,
+    "thresholds": {
+      "low_medium": 35,
+      "medium_high": 65
+    },
+    "visualization": {
+      "future_risk_line": [
+        {
+          "week": 1,
+          "date": "2026-07-06",
+          "risk": 76.1,
+          "risk_pct": 0.7614,
+          "confidence_lower": 68.1,
+          "confidence_upper": 84.1,
+          "risk_level": "High"
+        },
+        {
+          "week": 2,
+          "date": "2026-07-13",
+          "risk": 76.1,
+          "risk_pct": 0.7614,
+          "confidence_lower": 64.8,
+          "confidence_upper": 87.5,
+          "risk_level": "High"
+        },
+        {
+          "week": 3,
+          "date": "2026-07-20",
+          "risk": 76.0,
+          "risk_pct": 0.76,
+          "confidence_lower": 62.1,
+          "confidence_upper": 89.9,
+          "risk_level": "High"
+        },
+        {
+          "week": 4,
+          "date": "2026-07-27",
+          "risk": 76.2,
+          "risk_pct": 0.7618,
+          "confidence_lower": 60.2,
+          "confidence_upper": 92.2,
+          "risk_level": "High"
+        }
+      ],
+      "confidence_bands": [
+        {
+          "week": 1,
+          "lower": 68.1,
+          "upper": 84.1
+        },
+        {
+          "week": 2,
+          "lower": 64.8,
+          "upper": 87.5
+        },
+        {
+          "week": 3,
+          "lower": 62.1,
+          "upper": 89.9
+        },
+        {
+          "week": 4,
+          "lower": 60.2,
+          "upper": 92.2
+        }
+      ],
+      "current_position_marker": {
+        "week": 0,
+        "risk": 78.9
+      },
+      "threshold_crossing_marker": "2026-07-06"
+    },
+    "model": "xgboost_interface_sklearn_fallback",
+    "generated_at": "2026-06-29T12:00:29.392465+00:00",
+    "xgboost_available": false
+  },
+  "monte_carlo": {
+    "project_id": 1,
+    "simulations": 1000,
+    "planned_duration_days": 35,
+    "deadline_date": "2026-06-30",
+    "expected_delay_days": 81.0,
+    "delivery_probability": 0.0,
+    "probability_on_time": 0.0,
+    "p50_days": 116.0,
+    "p80_days": 116.0,
+    "p90_days": 116.0,
+    "p50_completion": "2026-07-06",
+    "p80_completion": "2026-07-06",
+    "p90_completion": "2026-07-06",
+    "confidence_interval": {
+      "p10_completion": "2026-07-06",
+      "p90_completion": "2026-07-06"
+    },
+    "percentile_markers": [
+      {
+        "percentile": 50,
+        "date": "2026-07-06",
+        "days_from_start": 116.0
+      },
+      {
+        "percentile": 80,
+        "date": "2026-07-06",
+        "days_from_start": 116.0
+      },
+      {
+        "percentile": 90,
+        "date": "2026-07-06",
+        "days_from_start": 116.0
+      }
+    ],
+    "histogram": [
+      {
+        "bin_start": 115.5,
+        "bin_end": 115.5,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.5,
+        "bin_end": 115.6,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.6,
+        "bin_end": 115.6,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.6,
+        "bin_end": 115.7,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.7,
+        "bin_end": 115.7,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.7,
+        "bin_end": 115.7,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.7,
+        "bin_end": 115.8,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.8,
+        "bin_end": 115.8,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.8,
+        "bin_end": 115.9,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.9,
+        "bin_end": 115.9,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.9,
+        "bin_end": 115.9,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 115.9,
+        "bin_end": 116.0,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-05",
+        "count": 0
+      },
+      {
+        "bin_start": 116.0,
+        "bin_end": 116.0,
+        "date_start": "2026-07-05",
+        "date_end": "2026-07-06",
+        "count": 1000
+      },
+      {
+        "bin_start": 116.0,
+        "bin_end": 116.1,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.1,
+        "bin_end": 116.1,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.1,
+        "bin_end": 116.1,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.1,
+        "bin_end": 116.2,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.2,
+        "bin_end": 116.2,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.2,
+        "bin_end": 116.3,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.3,
+        "bin_end": 116.3,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.3,
+        "bin_end": 116.3,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.3,
+        "bin_end": 116.4,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.4,
+        "bin_end": 116.4,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.4,
+        "bin_end": 116.5,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      },
+      {
+        "bin_start": 116.5,
+        "bin_end": 116.5,
+        "date_start": "2026-07-06",
+        "date_end": "2026-07-06",
+        "count": 0
+      }
+    ],
+    "cdf": [
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.001
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.034
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.067
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.1
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.133
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.166
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.199
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.232
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.265
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.298
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.331
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.364
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.397
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.43
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.463
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.496
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.529
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.562
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.595
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.628
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.661
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.694
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.727
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.76
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.793
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.826
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.859
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.892
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.925
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.958
+      },
+      {
+        "day": 116,
+        "date": "2026-07-06",
+        "probability": 0.991
+      }
+    ],
+    "generated_at": "2026-06-29T12:00:29.409307+00:00"
+  },
+  "similar_projects": {
+    "project_id": 1,
+    "project_name": "Project Phoenix",
+    "current_risk": 78.9,
+    "similar_projects": [
+      {
+        "project_id": 69,
+        "project_name": "Project Spectra",
+        "similarity_pct": 88.5,
+        "risk_score": 85.2,
+        "risk_level": "High",
+        "delayed": true,
+        "outcome": "Finished 61 days late",
+        "estimated_delay_days": 61,
+        "team_size": 14,
+        "sprint_velocity": 1.03,
+        "architecture_complexity": 6,
+        "technology_stack": "Mobile",
+        "deadline_pressure": 1.0,
+        "issue_trend": "stable"
+      },
+      {
+        "project_id": 233,
+        "project_name": "Project Vertex",
+        "similarity_pct": 88.4,
+        "risk_score": 30.6,
+        "risk_level": "Low",
+        "delayed": true,
+        "outcome": "Finished 96 days late",
+        "estimated_delay_days": 96,
+        "team_size": 8,
+        "sprint_velocity": 1.07,
+        "architecture_complexity": 6,
+        "technology_stack": "ERP",
+        "deadline_pressure": 1.0,
+        "issue_trend": "stable"
+      },
+      {
+        "project_id": 112,
+        "project_name": "Project Nova",
+        "similarity_pct": 87.8,
+        "risk_score": 74.5,
+        "risk_level": "High",
+        "delayed": true,
+        "outcome": "Finished 76 days late",
+        "estimated_delay_days": 76,
+        "team_size": 9,
+        "sprint_velocity": 0.61,
+        "architecture_complexity": 8,
+        "technology_stack": "Data Platform",
+        "deadline_pressure": 1.0,
+        "issue_trend": "rising"
+      },
+      {
+        "project_id": 113,
+        "project_name": "Project Vertex",
+        "similarity_pct": 80.7,
+        "risk_score": 81.0,
+        "risk_level": "High",
+        "delayed": true,
+        "outcome": "Finished 75 days late",
+        "estimated_delay_days": 75,
+        "team_size": 15,
+        "sprint_velocity": 0.9,
+        "architecture_complexity": 6,
+        "technology_stack": "ERP",
+        "deadline_pressure": 1.0,
+        "issue_trend": "stable"
+      },
+      {
+        "project_id": 248,
+        "project_name": "Project Orion",
+        "similarity_pct": 78.6,
+        "risk_score": 83.3,
+        "risk_level": "High",
+        "delayed": true,
+        "outcome": "Finished 91 days late",
+        "estimated_delay_days": 91,
+        "team_size": 16,
+        "sprint_velocity": 0.62,
+        "architecture_complexity": 6,
+        "technology_stack": "React/Web",
+        "deadline_pressure": 1.0,
+        "issue_trend": "stable"
+      }
+    ],
+    "insight": "Projects with >85% similarity finished late 100% of the time (avg delay: 77.7 days).",
+    "features_used": [
+      "team_size",
+      "sprint_velocity",
+      "scope_changes",
+      "bugs_open",
+      "tasks_completed_pct",
+      "team_availability_pct",
+      "planned_duration_days",
+      "bug_density",
+      "completion_gap",
+      "scope_risk",
+      "days_elapsed"
+    ],
+    "algorithm": "cosine_similarity"
+  },
+  "scenario_lab": {
+    "project_id": 1,
+    "current": {
+      "risk_score": 0.789269662118927,
+      "risk_pct": 78.9,
+      "features": {
+        "team_size": 9,
+        "sprint_velocity": 1.089917686854633,
+        "scope_changes": 3,
+        "bugs_open": 2,
+        "planned_duration_days": 35,
+        "tasks_completed_pct": 61.97302484811634,
+        "team_availability_pct": 64.35673367386926
+      }
+    },
+    "scenarios": [
+      {
+        "name": "Scenario A: Add 2 Developers",
+        "risk_score": 0.791644662118927,
+        "risk_pct": 79.2,
+        "risk_delta": 0.002375000000000016,
+        "risk_delta_pct": 0.2,
+        "improvement_pct": 0.0,
+        "features": {
+          "team_size": 12,
+          "sprint_velocity": 1.089917686854633,
+          "scope_changes": 3,
+          "bugs_open": 2,
+          "planned_duration_days": 35,
+          "tasks_completed_pct": 61.97302484811634,
+          "team_availability_pct": 64.35673367386926
+        },
+        "recommendations": [
+          {
+            "recommendation": "Raise team availability to 90%",
+            "expected_new_risk": 0.25985009258776093,
+            "expected_risk_reduction": 0.5294195695311661,
+            "estimated_improvement_pct": 52.94195695311661,
+            "implementation_difficulty": "Low",
+            "priority_score": 52.94195695311661,
+            "action_type": "capacity",
+            "intervention": {
+              "team_availability_pct": 90.0
+            }
+          },
+          {
+            "recommendation": "Reduce open bugs from 2 to 1",
+            "expected_new_risk": 0.755842172941438,
+            "expected_risk_reduction": 0.033427489177489056,
+            "estimated_improvement_pct": 3.3427489177489056,
+            "implementation_difficulty": "Low",
+            "priority_score": 3.3427489177489056,
+            "action_type": "quality",
+            "intervention": {
+              "bugs_open": 1
+            }
+          },
+          {
+            "recommendation": "Reduce scope by 20%",
+            "expected_new_risk": 0.7796219348461999,
+            "expected_risk_reduction": 0.009647727272727114,
+            "estimated_improvement_pct": 0.9647727272727114,
+            "implementation_difficulty": "Medium",
+            "priority_score": 0.6431818181818075,
+            "action_type": "scope_control",
+            "intervention": {
+              "scope_changes": 2
+            }
+          },
+          {
+            "recommendation": "Increase team size from 12 to 14",
+            "expected_new_risk": 0.7821803764046413,
+            "expected_risk_reduction": 0.007089285714285687,
+            "estimated_improvement_pct": 0.7089285714285687,
+            "implementation_difficulty": "High",
+            "priority_score": 0.3222402597402585,
+            "action_type": "staffing",
+            "intervention": {
+              "team_size": 14
+            }
+          }
+        ]
+      },
+      {
+        "name": "Scenario B: Reduce Scope",
+        "risk_score": 0.734281566880832,
+        "risk_pct": 73.4,
+        "risk_delta": -0.054988095238095,
+        "risk_delta_pct": -5.5,
+        "improvement_pct": 5.5,
+        "features": {
+          "team_size": 9,
+          "sprint_velocity": 1.089917686854633,
+          "scope_changes": 1,
+          "bugs_open": 2,
+          "planned_duration_days": 35,
+          "tasks_completed_pct": 61.97302484811634,
+          "team_availability_pct": 64.35673367386926
+        },
+        "recommendations": [
+          {
+            "recommendation": "Raise team availability to 90%",
+            "expected_new_risk": 0.22139157887924715,
+            "expected_risk_reduction": 0.5678780832396799,
+            "estimated_improvement_pct": 56.787808323967994,
+            "implementation_difficulty": "Low",
+            "priority_score": 56.787808323967994,
+            "action_type": "capacity",
+            "intervention": {
+              "team_availability_pct": 90.0
+            }
+          },
+          {
+            "recommendation": "Reduce open bugs from 2 to 1",
+            "expected_new_risk": 0.7307815668808318,
+            "expected_risk_reduction": 0.05848809523809517,
+            "estimated_improvement_pct": 5.848809523809518,
+            "implementation_difficulty": "Low",
+            "priority_score": 5.848809523809518,
+            "action_type": "quality",
+            "intervention": {
+              "bugs_open": 1
+            }
+          },
+          {
+            "recommendation": "Reduce scope by 20%",
+            "expected_new_risk": 0.7221010113252763,
+            "expected_risk_reduction": 0.06716865079365075,
+            "estimated_improvement_pct": 6.716865079365075,
+            "implementation_difficulty": "Medium",
+            "priority_score": 4.47791005291005,
+            "action_type": "scope_control",
+            "intervention": {
+              "scope_changes": 0
+            }
+          },
+          {
+            "recommendation": "Extend deadline by 2 weeks",
+            "expected_new_risk": 0.734281566880832,
+            "expected_risk_reduction": 0.054988095238095,
+            "estimated_improvement_pct": 5.4988095238095,
+            "implementation_difficulty": "Medium",
+            "priority_score": 3.665873015873,
+            "action_type": "timeline",
+            "intervention": {
+              "planned_duration_days": 49
+            }
+          }
+        ]
+      },
+      {
+        "name": "Scenario C: Extend Deadline",
+        "risk_score": 0.789269662118927,
+        "risk_pct": 78.9,
+        "risk_delta": 0.0,
+        "risk_delta_pct": 0.0,
+        "improvement_pct": 0.0,
+        "features": {
+          "team_size": 9,
+          "sprint_velocity": 1.089917686854633,
+          "scope_changes": 3,
+          "bugs_open": 2,
+          "planned_duration_days": 49,
+          "tasks_completed_pct": 61.97302484811634,
+          "team_availability_pct": 64.35673367386926
+        },
+        "recommendations": [
+          {
+            "recommendation": "Raise team availability to 90%",
+            "expected_new_risk": 0.24993342592109424,
+            "expected_risk_reduction": 0.5393362361978328,
+            "estimated_improvement_pct": 53.933623619783276,
+            "implementation_difficulty": "Low",
+            "priority_score": 53.933623619783276,
+            "action_type": "capacity",
+            "intervention": {
+              "team_availability_pct": 90.0
+            }
+          },
+          {
+            "recommendation": "Reduce open bugs from 2 to 1",
+            "expected_new_risk": 0.7534671729414381,
+            "expected_risk_reduction": 0.03580248917748896,
+            "estimated_improvement_pct": 3.580248917748896,
+            "implementation_difficulty": "Low",
+            "priority_score": 3.580248917748896,
+            "action_type": "quality",
+            "intervention": {
+              "bugs_open": 1
+            }
+          },
+          {
+            "recommendation": "Reduce scope by 20%",
+            "expected_new_risk": 0.7772469348461998,
+            "expected_risk_reduction": 0.01202272727272724,
+            "estimated_improvement_pct": 1.202272727272724,
+            "implementation_difficulty": "Medium",
+            "priority_score": 0.8015151515151494,
+            "action_type": "scope_control",
+            "intervention": {
+              "scope_changes": 2
+            }
+          },
+          {
+            "recommendation": "Improve sprint velocity from 1.09 to 1.31",
+            "expected_new_risk": 0.7891560257552906,
+            "expected_risk_reduction": 0.00011363636363637131,
+            "estimated_improvement_pct": 0.01136363636363713,
+            "implementation_difficulty": "Medium",
+            "priority_score": 0.007575757575758087,
+            "action_type": "delivery_flow",
+            "intervention": {
+              "sprint_velocity": 1.31
+            }
+          }
+        ]
+      }
+    ],
+    "comparison_table": [
+      {
+        "scenario": "Current State",
+        "risk_score": 78.9,
+        "risk_delta": 0.0,
+        "improvement_pct": 0.0,
+        "key_changes": "Baseline"
+      },
+      {
+        "scenario": "Scenario A: Add 2 Developers",
+        "risk_score": 79.2,
+        "risk_delta": 0.2,
+        "improvement_pct": 0.0,
+        "key_changes": "team_size: 12"
+      },
+      {
+        "scenario": "Scenario B: Reduce Scope",
+        "risk_score": 73.4,
+        "risk_delta": -5.5,
+        "improvement_pct": 5.5,
+        "key_changes": "scope_changes: 1"
+      },
+      {
+        "scenario": "Scenario C: Extend Deadline",
+        "risk_score": 78.9,
+        "risk_delta": 0.0,
+        "improvement_pct": 0.0,
+        "key_changes": "deadline_extension_days: 14"
+      }
+    ],
+    "radar_chart": {
+      "labels": [
+        "Team",
+        "Velocity",
+        "Scope Control",
+        "Quality",
+        "Timeline"
+      ],
+      "datasets": [
+        {
+          "label": "Current State",
+          "values": [
+            45.0,
+            72.7,
+            62.5,
+            96.7,
+            19.4
+          ]
+        },
+        {
+          "label": "Scenario A: Add 2 Developers",
+          "values": [
+            60.0,
+            72.7,
+            62.5,
+            96.7,
+            19.4
+          ]
+        },
+        {
+          "label": "Scenario B: Reduce Scope",
+          "values": [
+            45.0,
+            72.7,
+            87.5,
+            96.7,
+            19.4
+          ]
+        },
+        {
+          "label": "Scenario C: Extend Deadline",
+          "values": [
+            45.0,
+            72.7,
+            62.5,
+            96.7,
+            27.2
+          ]
+        }
+      ]
+    },
+    "recommendation_ranking": [
+      {
+        "scenario": "Scenario B: Reduce Scope",
+        "risk_pct": 73.4,
+        "improvement_pct": 5.5,
+        "rank": 1
+      },
+      {
+        "scenario": "Scenario C: Extend Deadline",
+        "risk_pct": 78.9,
+        "improvement_pct": 0.0,
+        "rank": 2
+      },
+      {
+        "scenario": "Scenario A: Add 2 Developers",
+        "risk_pct": 79.2,
+        "improvement_pct": 0.0,
+        "rank": 3
+      }
+    ],
+    "best_scenario": "Scenario B: Reduce Scope"
+  },
+  "portfolio": {
+    "portfolio_metrics": {
+      "total_projects": 300,
+      "portfolio_risk_score": 66.1,
+      "high_risk_projects": 212,
+      "total_expected_delay_days": 8918,
+      "resource_utilization": 74.3
+    },
+    "command_center": [
+      {
+        "project_id": 247,
+        "project": "Project #247",
+        "department": "Mobile",
+        "team": "Beta",
+        "risk": 97.2,
+        "forecast": "up",
+        "delay_days": 15,
+        "business_impact": 10,
+        "priority_score": 9.723
+      },
+      {
+        "project_id": 207,
+        "project": "Project #207",
+        "department": "Web",
+        "team": "Beta",
+        "risk": 93.3,
+        "forecast": "up",
+        "delay_days": 65,
+        "business_impact": 10,
+        "priority_score": 9.334
+      },
+      {
+        "project_id": 47,
+        "project": "Project #47",
+        "department": "Platform",
+        "team": "Beta",
+        "risk": 88.7,
+        "forecast": "up",
+        "delay_days": 52,
+        "business_impact": 10,
+        "priority_score": 8.866
+      },
+      {
+        "project_id": 77,
+        "project": "Project #77",
+        "department": "Platform",
+        "team": "Beta",
+        "risk": 87.4,
+        "forecast": "up",
+        "delay_days": 13,
+        "business_impact": 10,
+        "priority_score": 8.74
+      },
+      {
+        "project_id": 27,
+        "project": "Project #27",
+        "department": "Web",
+        "team": "Beta",
+        "risk": 86.7,
+        "forecast": "up",
+        "delay_days": 12,
+        "business_impact": 10,
+        "priority_score": 8.669
+      },
+      {
+        "project_id": 174,
+        "project": "Project #174",
+        "department": "Security",
+        "team": "Delta",
+        "risk": 95.7,
+        "forecast": "up",
+        "delay_days": 52,
+        "business_impact": 9,
+        "priority_score": 8.611
+      },
+      {
+        "project_id": 107,
+        "project": "Project #107",
+        "department": "Platform",
+        "team": "Beta",
+        "risk": 84.6,
+        "forecast": "up",
+        "delay_days": 47,
+        "business_impact": 10,
+        "priority_score": 8.458
+      },
+      {
+        "project_id": 164,
+        "project": "Project #164",
+        "department": "Backend",
+        "team": "Delta",
+        "risk": 92.4,
+        "forecast": "up",
+        "delay_days": 60,
+        "business_impact": 9,
+        "priority_score": 8.312
+      },
+      {
+        "project_id": 104,
+        "project": "Project #104",
+        "department": "Backend",
+        "team": "Delta",
+        "risk": 91.8,
+        "forecast": "up",
+        "delay_days": 14,
+        "business_impact": 9,
+        "priority_score": 8.26
+      },
+      {
+        "project_id": 37,
+        "project": "Project #37",
+        "department": "Mobile",
+        "team": "Beta",
+        "risk": 82.4,
+        "forecast": "up",
+        "delay_days": 83,
+        "business_impact": 10,
+        "priority_score": 8.24
+      },
+      {
+        "project_id": 97,
+        "project": "Project #97",
+        "department": "Mobile",
+        "team": "Beta",
+        "risk": 81.6,
+        "forecast": "up",
+        "delay_days": 11,
+        "business_impact": 10,
+        "priority_score": 8.156
+      },
+      {
+        "project_id": 64,
+        "project": "Project #64",
+        "department": "Data",
+        "team": "Delta",
+        "risk": 90.3,
+        "forecast": "up",
+        "delay_days": 13,
+        "business_impact": 9,
+        "priority_score": 8.127
+      }
+    ],
+    "risk_distribution": {
+      "High": 212,
+      "Low": 58,
+      "Medium": 30
+    },
+    "heatmaps": {
+      "department_risk_heatmap": [
+        {
+          "department": "Backend",
+          "avg_risk": 68.0,
+          "high_risk": 35,
+          "project_count": 50
+        },
+        {
+          "department": "Data",
+          "avg_risk": 70.6,
+          "high_risk": 38,
+          "project_count": 50
+        },
+        {
+          "department": "Mobile",
+          "avg_risk": 64.1,
+          "high_risk": 36,
+          "project_count": 50
+        },
+        {
+          "department": "Platform",
+          "avg_risk": 60.3,
+          "high_risk": 32,
+          "project_count": 50
+        },
+        {
+          "department": "Security",
+          "avg_risk": 65.5,
+          "high_risk": 34,
+          "project_count": 50
+        },
+        {
+          "department": "Web",
+          "avg_risk": 68.3,
+          "high_risk": 37,
+          "project_count": 50
+        }
+      ],
+      "team_risk_heatmap": [
+        {
+          "team": "Alpha",
+          "avg_risk": 65.7,
+          "high_risk": 44,
+          "project_count": 60
+        },
+        {
+          "team": "Beta",
+          "avg_risk": 64.3,
+          "high_risk": 39,
+          "project_count": 60
+        },
+        {
+          "team": "Delta",
+          "avg_risk": 64.2,
+          "high_risk": 41,
+          "project_count": 60
+        },
+        {
+          "team": "Gamma",
+          "avg_risk": 71.9,
+          "high_risk": 46,
+          "project_count": 60
+        },
+        {
+          "team": "Omega",
+          "avg_risk": 64.5,
+          "high_risk": 42,
+          "project_count": 60
+        }
+      ],
+      "timeline_heatmap": [
+        {
+          "period": "0-30",
+          "avg_risk": 66.7
+        },
+        {
+          "period": "31-60",
+          "avg_risk": 65.9
+        },
+        {
+          "period": "61-90",
+          "avg_risk": 64.0
+        },
+        {
+          "period": "91-120",
+          "avg_risk": 67.7
+        }
+      ]
+    },
+    "bottlenecks": {
+      "quality": [
+        {
+          "project_id": 50,
+          "bugs_open": 49,
+          "risk_score": 0.764870669234446
+        },
+        {
+          "project_id": 147,
+          "bugs_open": 49,
+          "risk_score": 0.4499061648490827
+        },
+        {
+          "project_id": 166,
+          "bugs_open": 49,
+          "risk_score": 0.7053474679560204
+        },
+        {
+          "project_id": 171,
+          "bugs_open": 49,
+          "risk_score": 0.3572232738022214
+        },
+        {
+          "project_id": 177,
+          "bugs_open": 49,
+          "risk_score": 0.7970730599809548
+        }
+      ],
+      "scope": [
+        {
+          "project_id": 9,
+          "scope_changes": 7,
+          "risk_score": 0.8336837250440192
+        },
+        {
+          "project_id": 16,
+          "scope_changes": 7,
+          "risk_score": 0.869752367794744
+        },
+        {
+          "project_id": 20,
+          "scope_changes": 7,
+          "risk_score": 0.7311329202488258
+        },
+        {
+          "project_id": 21,
+          "scope_changes": 7,
+          "risk_score": 0.9460598845598842
+        },
+        {
+          "project_id": 24,
+          "scope_changes": 7,
+          "risk_score": 0.9019417249417248
+        }
+      ],
+      "capacity": [
+        {
+          "project_id": 204,
+          "team_availability_pct": 60.013300244819575,
+          "risk_score": 0.7931816516816517
+        },
+        {
+          "project_id": 128,
+          "team_availability_pct": 60.049467190376376,
+          "risk_score": 0.7896631190446978
+        },
+        {
+          "project_id": 48,
+          "team_availability_pct": 60.103360593799295,
+          "risk_score": 0.8632774153950623
+        },
+        {
+          "project_id": 88,
+          "team_availability_pct": 60.632843670623295,
+          "risk_score": 0.9478095605375018
+        },
+        {
+          "project_id": 205,
+          "team_availability_pct": 60.70751238453029,
+          "risk_score": 0.62318501684504
+        }
+      ]
+    },
+    "top_priority_projects": [
+      {
+        "project_id": 247,
+        "department": "Mobile",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.9722976190476192,
+        "business_impact": 10,
+        "priority_score": 9.722976190476192,
+        "expected_delay_days": 15
+      },
+      {
+        "project_id": 207,
+        "department": "Web",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.9333799603174602,
+        "business_impact": 10,
+        "priority_score": 9.333799603174601,
+        "expected_delay_days": 65
+      },
+      {
+        "project_id": 47,
+        "department": "Platform",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.8866078851703852,
+        "business_impact": 10,
+        "priority_score": 8.866078851703852,
+        "expected_delay_days": 52
+      },
+      {
+        "project_id": 77,
+        "department": "Platform",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.8740016233766232,
+        "business_impact": 10,
+        "priority_score": 8.740016233766232,
+        "expected_delay_days": 13
+      },
+      {
+        "project_id": 27,
+        "department": "Web",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.8669439073997899,
+        "business_impact": 10,
+        "priority_score": 8.669439073997898,
+        "expected_delay_days": 12
+      },
+      {
+        "project_id": 174,
+        "department": "Security",
+        "team": "Delta",
+        "risk_level": "High",
+        "risk_score": 0.9567684884559884,
+        "business_impact": 9,
+        "priority_score": 8.610916396103896,
+        "expected_delay_days": 52
+      },
+      {
+        "project_id": 107,
+        "department": "Platform",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.8457739205239204,
+        "business_impact": 10,
+        "priority_score": 8.457739205239204,
+        "expected_delay_days": 47
+      },
+      {
+        "project_id": 164,
+        "department": "Backend",
+        "team": "Delta",
+        "risk_level": "High",
+        "risk_score": 0.9235082070707072,
+        "business_impact": 9,
+        "priority_score": 8.311573863636365,
+        "expected_delay_days": 60
+      },
+      {
+        "project_id": 104,
+        "department": "Backend",
+        "team": "Delta",
+        "risk_level": "High",
+        "risk_score": 0.9178038628038624,
+        "business_impact": 9,
+        "priority_score": 8.260234765234761,
+        "expected_delay_days": 14
+      },
+      {
+        "project_id": 37,
+        "department": "Mobile",
+        "team": "Beta",
+        "risk_level": "High",
+        "risk_score": 0.8240375180375179,
+        "business_impact": 10,
+        "priority_score": 8.240375180375178,
+        "expected_delay_days": 83
+      }
+    ],
+    "prioritization_method": "business_impact x risk_probability"
+  },
+  "drift": {
+    "timestamp": "2026-06-29T12:00:30.420282+00:00",
+    "model_version": "v1.2.0",
+    "samples_analyzed": 300,
+    "overall_status": "critical",
+    "drift_report": {
+      "drift_detected": true,
+      "overall_status": "critical",
+      "critical_features": [
+        "bugs_open"
+      ],
+      "feature_drift": [
+        {
+          "feature": "team_size",
+          "psi": 0.0,
+          "ks_statistic": 0.0,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "sprint_velocity",
+          "psi": 0.088,
+          "ks_statistic": 0.0833,
+          "kl_divergence": 0.112,
+          "status": "warning",
+          "recommendation": "monitor"
+        },
+        {
+          "feature": "tasks_completed_pct",
+          "psi": 0.0,
+          "ks_statistic": 0.0033,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "scope_changes",
+          "psi": 0.0,
+          "ks_statistic": 0.0,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "bugs_open",
+          "psi": 0.1217,
+          "ks_statistic": 0.1767,
+          "kl_divergence": 0.2399,
+          "status": "critical",
+          "recommendation": "retrain model"
+        },
+        {
+          "feature": "team_availability_pct",
+          "psi": 0.0,
+          "ks_statistic": 0.0,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "velocity_trend",
+          "psi": 0.0,
+          "ks_statistic": 0.0033,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "scope_risk",
+          "psi": 0.0656,
+          "ks_statistic": 0.14,
+          "kl_divergence": 0.0781,
+          "status": "warning",
+          "recommendation": "monitor"
+        },
+        {
+          "feature": "completion_gap",
+          "psi": 0.0,
+          "ks_statistic": 0.0033,
+          "kl_divergence": 0.0,
+          "status": "stable",
+          "recommendation": "no action"
+        },
+        {
+          "feature": "bug_density",
+          "psi": 0.1834,
+          "ks_statistic": 0.1533,
+          "kl_divergence": 0.0753,
+          "status": "warning",
+          "recommendation": "monitor"
+        }
+      ],
+      "thresholds": {
+        "psi": 0.25,
+        "ks_statistic": 0.2,
+        "kl_divergence": 0.15
+      }
+    },
+    "prediction_drift": {
+      "psi": 0.0,
+      "status": "stable",
+      "recommendation": "monitor"
+    },
+    "target_drift": {
+      "reference_delay_rate": 0.7833,
+      "current_delay_rate": 0.7833,
+      "delta": 0.0,
+      "status": "stable"
+    },
+    "feature_importance_changes": [
+      {
+        "feature": "team_availability_pct",
+        "current_importance": 0.1858,
+        "baseline_importance": 0.1858,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "sprint_velocity",
+        "current_importance": 0.1853,
+        "baseline_importance": 0.1853,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "bugs_open",
+        "current_importance": 0.145,
+        "baseline_importance": 0.145,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "scope_risk",
+        "current_importance": 0.1382,
+        "baseline_importance": 0.1382,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "scope_changes",
+        "current_importance": 0.1368,
+        "baseline_importance": 0.1368,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "bug_density",
+        "current_importance": 0.0505,
+        "baseline_importance": 0.0505,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "velocity_trend",
+        "current_importance": 0.0438,
+        "baseline_importance": 0.0438,
+        "change": 0.0,
+        "status": "stable"
+      },
+      {
+        "feature": "tasks_completed_pct",
+        "current_importance": 0.0415,
+        "baseline_importance": 0.0415,
+        "change": 0.0,
+        "status": "stable"
+      }
+    ],
+    "alerts": [
+      {
+        "severity": "critical",
+        "message": "bugs_open distribution differs significantly from training data.",
+        "recommendation": "retrain model"
+      }
+    ],
+    "automatic_actions": {
+      "retraining_recommended": true,
+      "retraining_trigger": "manual_approval_required",
+      "alert_generation": [
+        {
+          "severity": "critical",
+          "message": "bugs_open distribution differs significantly from training data.",
+          "recommendation": "retrain model"
+        }
+      ]
+    }
+  },
+  "assistant": {
+    "project_id": 1,
+    "question": "Why is this project risky?",
+    "response": "Project #1 is High risk with score 78.9% [project_metrics].\nPrimary drivers [shap_explanations]:\n- Low availability contributed +32.7%\n- Velocity decrease contributed +2.6%\n- Team capacity contributed +2.1%",
+    "citations": [
+      {
+        "source": "historical_similarity",
+        "path": "src/similarity/historical_similarity.py"
+      },
+      {
+        "source": "project_metrics",
+        "path": "data/projects_scored.csv"
+      },
+      {
+        "source": "recommendation_engine",
+        "path": "data/recommendations.json"
+      },
+      {
+        "source": "risk_forecast",
+        "path": "src/forecasting/forecaster.py"
+      },
+      {
+        "source": "shap_explanations",
+        "path": "data/shap_values.json"
+      }
+    ],
+    "sources_used": [
+      "historical_similarity",
+      "project_metrics",
+      "recommendation_engine",
+      "risk_forecast",
+      "shap_explanations"
+    ],
+    "generation_mode": "local_rule_based",
+    "langchain_available": true,
+    "guardrails": [
+      "retrieved_context_only",
+      "no_external_facts",
+      "source_citations_required"
+    ]
+  }
+}
