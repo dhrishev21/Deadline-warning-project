@@ -326,3 +326,12 @@ python -B src/generate_advanced_artifacts.py
 ```
 
 Latest test run: 8 tests passed.
+
+## Performance Benchmarking
+
+The repository includes an API benchmarking utility that measures latency across forecasting, Monte Carlo simulation, similarity search, drift monitoring, and AI assistant endpoints.
+
+Run:
+
+```bash
+python benchmark_api.py
